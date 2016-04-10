@@ -7,12 +7,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/de/jxsl13/java/kickstarterParser/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/de/jxsl13/java/kickstarterParser/resources/audio" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/de/jxsl13/java/kickstarterParser/resources/images" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="org.jsoup:jsoup:1.8.3" level="project" />
-    <orderEntry type="library" name="commons-validator-1.5" level="project" />
-    <orderEntry type="library" name="org.json:json:20160212" level="project" />
-    <orderEntry type="library" name="AlgoTools" level="project" />
+    <orderEntry type="library" exported="" name="org.jsoup:jsoup:1.8.3" level="application" />
+    <orderEntry type="library" exported="" name="commons-validator-1.5" level="application" />
+    <orderEntry type="library" exported="" name="org.json:json:20160212" level="application" />
+    <orderEntry type="library" exported="" name="AlgoTools" level="application" />
   </component>
 </module>
