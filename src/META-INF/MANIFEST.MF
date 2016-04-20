@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: /Users/john/IdeaProjects/Kickstarter-Parser/src/Main.java
+Main-Class: de.jxsl13.java.kickstarterParser.Main
+

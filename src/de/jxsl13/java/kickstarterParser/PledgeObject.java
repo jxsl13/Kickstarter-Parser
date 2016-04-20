@@ -2,9 +2,7 @@ package de.jxsl13.java.kickstarterParser;
 
 import org.json.JSONObject;
 
-/**
- * Created by john on 10.04.16.
- */
+
 public class PledgeObject {
 
     private int rewardId = -1;
@@ -31,11 +29,7 @@ public class PledgeObject {
         if (!object.isNull("backers_count"))backersCount = object.getInt("backers_count");
         if (!object.isNull("remaining"))remaining = object.getInt("remaining");
         if (!object.isNull("limit"))limit = object.getInt("limit");
-        if(remaining ==0){
-            allGone = true;
-        }else {
-            allGone = false;
-        }
+        allGone = remaining == 0;
 
 
 
@@ -43,21 +37,22 @@ public class PledgeObject {
 
 
     public String getBasicInfo(){
+        return "ID: " + rewardId + " - Pledge amount: " + (int) pledgeAmount + " $ / € - Remaining: " + (remaining >= 0 ? remaining : "infinite");
+    }
+
+    public String getGeneralInfo() {
         return "ID: "+rewardId +" - Pledge amount: "+(int) pledgeAmount+" $ / € - Remaining: "+(remaining >=0?remaining:"infinite")+" - Reward: " +reward;
+
     }
     public int getRemaining(){
         return remaining;
     }
 
     public boolean equals(PledgeObject pledgeObject){
-        if (    this.rewardId == pledgeObject.rewardId &&
+        return this.rewardId == pledgeObject.rewardId &&
                 this.pledgeAmount == pledgeObject.pledgeAmount &&
                 this.backersCount == pledgeObject.backersCount &&
-                this.remaining == pledgeObject.remaining) {
-            return true;
-        } else {
-            return false;
-        }
+                this.remaining == pledgeObject.remaining;
     }
 
     public String compareRemaining(PledgeObject pledgeObject){
@@ -78,11 +73,7 @@ public class PledgeObject {
         if (!object.isNull("backers_count"))backersCount = object.getInt("backers_count");
         if (!object.isNull("remaining"))remaining = object.getInt("remaining");
         if (!object.isNull("limit"))limit = object.getInt("limit");
-        if(remaining ==0){
-            allGone = true;
-        }else {
-            allGone = false;
-        }
+        allGone = remaining == 0;
     }
 
 
