@@ -10,5 +10,9 @@
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/json/json/20160212/json-20160212-sources.jar!/" />
     </SOURCES>
+    <excluded>
+      <root url="jar://$MAVEN_REPOSITORY$/org/json/json/20160212/json-20160212-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/json/json/20160212/json-20160212-sources.jar!/" />
+    </excluded>
   </library>
 </component>

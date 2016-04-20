@@ -5,16 +5,17 @@ import AlgoTools.IO;
 import java.util.ArrayList;
 
 public class Main {
-    static boolean exit = false;
-    static String projectUrl ="";
-    static int pledgeNumber = -1;
-    static ArrayList<Integer> pledgeNumbers = new ArrayList<>();
-    static int sleepInterval = 30000;
+    private static boolean exit = false;
+    private static String projectUrl = "";
+    private static ArrayList<Integer> pledgeNumbers = new ArrayList<Integer>();
+    private static int sleepInterval = 30000;
 
 
     public static void main(String[] args) {
 
-        playSound();
+        // TODO: getting that stupid reference right, which causes the standalone jar file to fail executing its .wav file.
+        //playSound();
+
         System.out.println("Just now you heard the notification sound that will be heard again on any changes that occur on your watched pledges. ");
 
         sleepInterval = IO.readInt("Please enter an interval of seconds(integer value) which is waited before checking for changes: ") * 1000;
@@ -56,7 +57,7 @@ public class Main {
                     System.out.println(second.getPledgeObjects().get(pledgeNumbers.get(i)).getBasicInfo());
                     first.getPledgeObjects().get(pledgeNumbers.get(i)).compareRemaining(second.getPledgeObjects().get(pledgeNumbers.get(i)));
 
-                    playSound();
+                    //playSound();
 
                 } else {
                     System.out.println("No changes on your watched pledge object: ");
@@ -91,7 +92,7 @@ public class Main {
     }
 
     static void playSound() {
-        new AePlayWave("src/de/jxsl13/java/kickstarterParser/resources/audio/ding_sound.wav").start();
+        new AePlayWave(Main.class.getResource("ding_sound.wav").getFile()).start();
 
     }
 

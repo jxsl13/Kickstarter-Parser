@@ -18,7 +18,7 @@ public class ProjectPage {
     private int backerCountTotal;
     private long pledgeAmountTotal;
     private String JSONinfoString;
-    private ArrayList<PledgeObject> pledgeObjectArrayList = new ArrayList<>();
+    private ArrayList<PledgeObject> pledgeObjectArrayList = new ArrayList<PledgeObject>();
 
 
     ProjectPage(String URL) {
