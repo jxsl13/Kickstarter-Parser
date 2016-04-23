@@ -26,7 +26,7 @@ public class ProjectPage {
         UrlValidator validator = new UrlValidator(schemes);
         Document website = null;
         Elements allElements;
-        String scriptString;
+        String scriptString = "";
         String unescapedJSONstring;
         String escapedJSONstring;
         String escapedGeneralInfo;
@@ -43,12 +43,17 @@ public class ProjectPage {
                     allElements = new Elements(website.getElementsByTag("script"));
                     //System.out.println("All " + allElements.size() + " Elements retrieved...");
 
-                    scriptString = allElements.get(6).toString();
-                    int beginIndex = scriptString.lastIndexOf("current_project = ") + 19;
+                    for (int i = 0; i < allElements.size(); i++) {
+                        if (allElements.get(i).toString().contains("window.current_project")) {
+                            scriptString = allElements.get(i).toString();
+                            break;
+                        }
+                    }
+                    int beginIndex = scriptString.lastIndexOf("window.current_project = ") + 19;
                     int endIndex = scriptString.indexOf("window.current_location = ") - 14;
                     unescapedJSONstring = scriptString.substring(beginIndex, endIndex);
                     //System.out.println(unescapedJSONstring);
-
+                    System.out.println("Test 1");
                     escapedJSONstring = Parser.unescapeEntities(unescapedJSONstring, false);
                     int rewardsBeginIndex = escapedJSONstring.indexOf("\"rewards\":[") + 10;
                     escapedGeneralInfo = escapedJSONstring.substring(0, rewardsBeginIndex);
@@ -73,6 +78,7 @@ public class ProjectPage {
                 } catch (Exception ex) {
                     // Exception no connectivity or could not get website data.
                     System.out.println(ex.getMessage());
+                    ex.printStackTrace();
                     System.out.println("Cannot retrieve website data, please try again or check your internet connection.");
                     System.exit(3);
                 }
