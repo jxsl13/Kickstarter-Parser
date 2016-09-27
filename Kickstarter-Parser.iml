@@ -12,9 +12,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="org.jsoup:jsoup:1.9.1" level="project" />
-    <orderEntry type="library" name="commons-validator-1.5.0" level="project" />
-    <orderEntry type="library" name="org.json:json:20160212" level="project" />
-    <orderEntry type="library" name="AlgoTools" level="project" />
+    <orderEntry type="library" exported="" name="org.jsoup:jsoup:1.9.1" level="project" />
+    <orderEntry type="library" exported="" name="org.json:json:20160212" level="project" />
+    <orderEntry type="library" exported="" name="AlgoTools" level="project" />
+    <orderEntry type="library" exported="" name="commons-validator-1.5.1" level="project" />
   </component>
 </module>

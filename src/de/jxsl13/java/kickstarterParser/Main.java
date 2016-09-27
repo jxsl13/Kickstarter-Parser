@@ -16,7 +16,7 @@ public class Main {
         // TODO: getting that stupid reference right, which causes the standalone jar file to fail executing its .wav file.
         //playSound();
 
-        System.out.println("Just now you heard the notification sound that will be heard again on any changes that occur on your watched pledges. ");
+        //System.out.println("Just now you heard the notification sound that will be heard again on any changes that occur on your watched pledges. ");
 
         sleepInterval = IO.readInt("Please enter an interval of seconds(integer value) which is waited before checking for changes: ") * 1000;
         if (sleepInterval < 5000) {

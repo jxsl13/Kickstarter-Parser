@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="AlgoTools">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/AlgoTools.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/Java-Libraries/AlgoTools.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/lib/AlgoTools.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/Java-Libraries/AlgoTools.jar!/" />
     </SOURCES>
   </library>
 </component>

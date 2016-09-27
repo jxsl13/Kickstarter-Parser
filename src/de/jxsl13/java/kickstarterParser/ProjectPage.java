@@ -53,7 +53,7 @@ public class ProjectPage {
                     int endIndex = scriptString.indexOf("window.current_location = ") - 14;
                     unescapedJSONstring = scriptString.substring(beginIndex, endIndex);
                     //System.out.println(unescapedJSONstring);
-                    System.out.println("Test 1");
+                    //System.out.println("Test 1");
                     escapedJSONstring = Parser.unescapeEntities(unescapedJSONstring, false);
                     int rewardsBeginIndex = escapedJSONstring.indexOf("\"rewards\":[") + 10;
                     escapedGeneralInfo = escapedJSONstring.substring(0, rewardsBeginIndex);
