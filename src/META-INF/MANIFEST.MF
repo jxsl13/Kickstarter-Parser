@@ -1,5 +1,3 @@
 Manifest-Version: 1.0
-Class-Path: commons-validator-1.5.1.jar AlgoTools.jar json-20160212.ja
- r jsoup-1.9.1.jar
 Main-Class: de.jxsl13.java.kickstarterParser.Main
 
