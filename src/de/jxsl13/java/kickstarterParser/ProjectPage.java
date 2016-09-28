@@ -42,7 +42,6 @@ public class ProjectPage {
 
                     allElements = new Elements(website.getElementsByTag("script"));
                     //System.out.println("All " + allElements.size() + " Elements retrieved...");
-
                     for (int i = 0; i < allElements.size(); i++) {
                         if (allElements.get(i).toString().contains("window.current_project")) {
                             scriptString = allElements.get(i).toString();
@@ -50,7 +49,9 @@ public class ProjectPage {
                         }
                     }
                     int beginIndex = scriptString.lastIndexOf("window.current_project = ") + 19;
-                    int endIndex = scriptString.indexOf("window.current_location = ") - 14;
+                    int endIndex = scriptString.indexOf("\";");
+                    //int endIndex = scriptString.indexOf("window.current_location = ") - 14;
+                    //System.out.println(scriptString);
                     unescapedJSONstring = scriptString.substring(beginIndex, endIndex);
                     //System.out.println(unescapedJSONstring);
                     //System.out.println("Test 1");
