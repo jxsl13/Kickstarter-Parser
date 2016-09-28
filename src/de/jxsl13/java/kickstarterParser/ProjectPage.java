@@ -33,72 +33,77 @@ public class ProjectPage {
         String escapedRewards;
         String[] rewardStrings;
 
-        if (validator.isValid(URL)) {
-            if (URL.contains("kickstarter.com/projects/")) {
+        if (URL.contains("www.kickstarter.com/projects/") && (!URL.contains("https://") || !URL.contains("http://")) && URL.startsWith("www.")) {
+            URL = "https://".concat(URL);
+        }
 
-                try {
-                    website = Jsoup.connect(URL).maxBodySize(0).timeout(300*1000).get();
-                    System.out.println("Website retrieved!...");
 
-                    allElements = new Elements(website.getElementsByTag("script"));
-                    //System.out.println("All " + allElements.size() + " Elements retrieved...");
-                    for (int i = 0; i < allElements.size(); i++) {
-                        if (allElements.get(i).toString().contains("window.current_project")) {
-                            scriptString = allElements.get(i).toString();
-                            break;
+            if (validator.isValid(URL)) {
+                if (URL.contains("kickstarter.com/projects/")) {
+
+                    try {
+                        website = Jsoup.connect(URL).maxBodySize(0).timeout(300 * 1000).get();
+                        System.out.println("Website retrieved!...");
+
+                        allElements = new Elements(website.getElementsByTag("script"));
+                        //System.out.println("All " + allElements.size() + " Elements retrieved...");
+                        for (int i = 0; i < allElements.size(); i++) {
+                            if (allElements.get(i).toString().contains("window.current_project")) {
+                                scriptString = allElements.get(i).toString();
+                                break;
+                            }
                         }
+                        int beginIndex = scriptString.lastIndexOf("window.current_project = ") + 19;
+                        int endIndex = scriptString.indexOf("\";");
+                        //int endIndex = scriptString.indexOf("window.current_location = ") - 14;
+                        //System.out.println(scriptString);
+                        unescapedJSONstring = scriptString.substring(beginIndex, endIndex);
+                        //System.out.println(unescapedJSONstring);
+                        //System.out.println("Test 1");
+                        escapedJSONstring = Parser.unescapeEntities(unescapedJSONstring, false);
+                        int rewardsBeginIndex = escapedJSONstring.indexOf("\"rewards\":[") + 10;
+                        escapedGeneralInfo = escapedJSONstring.substring(0, rewardsBeginIndex);
+
+                        escapedRewards = escapedJSONstring.substring(rewardsBeginIndex, escapedJSONstring.length());
+                        //escapedRewards = escapedRewards.replace("\\\\n", "");
+                        //escapedRewards = escapedRewards.replace("\\\\r", "");
+                        //escapedRewards = escapedRewards.replace("\\\\","");
+                        escapedRewards = escapedRewards.replace("\\\\\"", "\\\\x");
+                        rewardStrings = escapedRewards.split("(?=,\\{)");
+
+
+                        for (int i = 0; i < rewardStrings.length; i++) {
+                            rewardStrings[i] = rewardStrings[i].substring(1);
+                            // System.out.println(rewardStrings[i]);
+                            PledgeObject pledge = new PledgeObject((new JSONObject(rewardStrings[i])));
+                            pledgeObjectArrayList.add(pledge);
+                        }
+
+
+                    } catch (Exception ex) {
+                        // Exception no connectivity or could not get website data.
+                        System.out.println(ex.getMessage());
+                        ex.printStackTrace();
+                        System.out.println("Cannot retrieve website data, please try again or check your internet connection.");
+                        System.exit(3);
                     }
-                    int beginIndex = scriptString.lastIndexOf("window.current_project = ") + 19;
-                    int endIndex = scriptString.indexOf("\";");
-                    //int endIndex = scriptString.indexOf("window.current_location = ") - 14;
-                    //System.out.println(scriptString);
-                    unescapedJSONstring = scriptString.substring(beginIndex, endIndex);
-                    //System.out.println(unescapedJSONstring);
-                    //System.out.println("Test 1");
-                    escapedJSONstring = Parser.unescapeEntities(unescapedJSONstring, false);
-                    int rewardsBeginIndex = escapedJSONstring.indexOf("\"rewards\":[") + 10;
-                    escapedGeneralInfo = escapedJSONstring.substring(0, rewardsBeginIndex);
-
-                    escapedRewards = escapedJSONstring.substring(rewardsBeginIndex, escapedJSONstring.length());
-                    //escapedRewards = escapedRewards.replace("\\\\n", "");
-                    //escapedRewards = escapedRewards.replace("\\\\r", "");
-                    //escapedRewards = escapedRewards.replace("\\\\","");
-                    escapedRewards = escapedRewards.replace("\\\\\"", "\\\\x");
-                    rewardStrings = escapedRewards.split("(?=,\\{)");
 
 
+                } else {
+                    // Exception wrong website
+                    System.out.println("Invalid URL, please enter a kickstarter.com project page URL.");
+                    System.exit(2);
 
-                    for (int i = 0; i < rewardStrings.length; i++) {
-                        rewardStrings[i] = rewardStrings[i].substring(1);
-                       // System.out.println(rewardStrings[i]);
-                        PledgeObject pledge = new PledgeObject((new JSONObject(rewardStrings[i])));
-                        pledgeObjectArrayList.add(pledge);
-                    }
-
-
-                } catch (Exception ex) {
-                    // Exception no connectivity or could not get website data.
-                    System.out.println(ex.getMessage());
-                    ex.printStackTrace();
-                    System.out.println("Cannot retrieve website data, please try again or check your internet connection.");
-                    System.exit(3);
                 }
 
-
             } else {
-                // Exception wrong website
-                System.out.println("Invalid URL, please enter a kickstarter.com project page URL.");
-                System.exit(2);
+                //Exception invalid URL
+                System.out.print("Invalid URL, please enter a valid URL");
+                System.exit(1);
 
             }
-
-        } else {
-            //Exception invalid URL
-            System.out.print("Invalid URL, please enter a valid URL");
-            System.exit(1);
-
         }
-    }
+
 
     public ArrayList<PledgeObject> getPledgeObjects(){
         return pledgeObjectArrayList;
