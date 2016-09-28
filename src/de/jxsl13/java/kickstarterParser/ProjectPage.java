@@ -37,7 +37,7 @@ public class ProjectPage {
             if (URL.contains("kickstarter.com/projects/")) {
 
                 try {
-                    website = Jsoup.connect(URL).maxBodySize(0).get();
+                    website = Jsoup.connect(URL).maxBodySize(0).timeout(300*1000).get();
                     System.out.println("Website retrieved!...");
 
                     allElements = new Elements(website.getElementsByTag("script"));
