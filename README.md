@@ -15,9 +15,9 @@ It's self-explaining, you can watch multiple pledges of one project at once. The
 
 # Usage
 
-Open the cmd.exe (on Windows) or the terminal(Linux & macOS)
-Navigate with cd foldername to the folder containing th downloaded '.jar file'
-Open the .jar file and follow the on-screen instructions.
+Open the cmd.exe (on Windows) or the terminal(Linux & macOS)  
+Navigate with cd foldername to the folder containing th downloaded '.jar file'  
+Open the .jar file and follow the on-screen instructions.  
 
 ```sh
 cd Desktop
